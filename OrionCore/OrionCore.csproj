@@ -75,7 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Betas\ErrorManagement\OrionErrorLogInfos.cs" />
+    <Compile Include="Betas\ErrorManagement\StructOrionErrorLogInfos.cs" />
     <Compile Include="Betas\ErrorManagement\IOrionErrorLogManager.cs" />
     <Compile Include="Betas\ErrorManagement\OrionErrorManager.cs" />
     <Compile Include="OrionDeploymentInfos.cs" />
