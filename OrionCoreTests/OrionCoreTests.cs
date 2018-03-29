@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OrionCore.ErrorManagement;
+using OrionFiles;
 using OrionCore;
 
 namespace OrionCoreTests
@@ -12,8 +13,8 @@ namespace OrionCoreTests
     {
         #region Fields
         private static Exception xInnerException = new ArgumentException("Test exception;");
-        private static String strLogFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestsLogs");
-        //private static String strLogFilePath = Path.Combine("c:\\", "Temp", "XErrorManagerTests", "Error.log");
+        private static String strLogFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestLogs");
+        private static String strLogFilePath = Path.Combine(strLogFileDirectory, "Error.log");
         private static OrionHistoryFile xOrionHistoryFile;
         #endregion
 
@@ -21,14 +22,12 @@ namespace OrionCoreTests
         [TestInitialize]
         public void Initialize()
         {
-            //    String strLogFileDirectoryPath;
-
             if (String.IsNullOrWhiteSpace(OrionCoreTests.strLogFileDirectory) == false)
             {
                 if (Directory.Exists(OrionCoreTests.strLogFileDirectory) == false) Directory.CreateDirectory(OrionCoreTests.strLogFileDirectory);
-                //        if (File.Exists(XCoreTests.strLogFilePath) == true) File.Delete(XCoreTests.strLogFilePath);
+                if (File.Exists(OrionCoreTests.strLogFilePath) == true) File.Delete(OrionCoreTests.strLogFilePath);
 
-                //        XCoreTests.xXHistoryFile = new XHistoryFile(strLogFilePath);
+                OrionCoreTests.xOrionHistoryFile = new OrionHistoryFile(strLogFilePath);
             }
         }// Initialize()
         #endregion

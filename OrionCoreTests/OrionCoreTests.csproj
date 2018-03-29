@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OrionFiles\OrionFiles\OrionFiles.csproj">
+      <Project>{dca81bdb-0ceb-4842-9e99-2fb03dbc7589}</Project>
+      <Name>OrionFiles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OrionCore\OrionCore.csproj">
       <Project>{bd00b457-50d5-48bb-b7cb-ea2704d19592}</Project>
       <Name>OrionCore</Name>
