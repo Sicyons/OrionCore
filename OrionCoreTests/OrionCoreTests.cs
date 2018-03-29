@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OrionCore.ErrorManagement;
 using OrionCore;
 
 namespace OrionCoreTests
@@ -10,7 +11,7 @@ namespace OrionCoreTests
     public class OrionCoreTests
     {
         #region Fields
-        //private static Exception xInnerException = new ArgumentException("Test exception;");
+        private static Exception xInnerException = new ArgumentException("Test exception;");
         private static String strLogFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestsLogs");
         //private static String strLogFilePath = Path.Combine("c:\\", "Temp", "XErrorManagerTests", "Error.log");
         //private static XHistoryFile xXHistoryFile;
@@ -60,80 +61,80 @@ namespace OrionCoreTests
         }// OrionDeploymentInfos_VersionPublication_Dash()
         #endregion
 
-        //#region XException
-        //[TestCategory("XException")]
-        //[TestMethod]
-        //public void CreateXException_EmptyException_IsCreated()
-        //{
-        //    XException xException;
+        #region XException
+        [TestCategory("OrionException")]
+        [TestMethod]
+        public void CreateOrionException_EmptyException_IsCreated()
+        {
+            OrionException xOrionException;
 
-        //    xException = new XException();
+            xOrionException = new OrionException();
 
-        //    Assert.IsNotNull(xException);
-        //}// CreateXException_EmptyException_IsCreated()
-        //[TestCategory("XException")]
-        //[TestMethod]
-        //public void CreateXException_CustomMessage_IsCreated()
-        //{
-        //    XException xException;
+            Assert.IsNotNull(xOrionException);
+        }// CreateOrionException_EmptyException_IsCreated()
+        [TestCategory("OrionException")]
+        [TestMethod]
+        public void CreateOrionException_CustomMessage_IsCreated()
+        {
+            OrionException xOrionException;
 
-        //    xException = new XException("Test message;");
+            xOrionException = new OrionException("Test message;");
 
-        //    Assert.IsNotNull(xException);
-        //    Assert.AreEqual(xException.Message, "Test message;");
-        //}// CreateXException_CustomMessage_IsCreated()
-        //[TestCategory("XException")]
-        //[TestMethod]
-        //public void CreateXException_CustomMessageData_IsCreated()
-        //{
-        //    XException xException;
+            Assert.IsNotNull(xOrionException);
+            Assert.AreEqual(xOrionException.Message, "Test message;");
+        }// CreateOrionException_CustomMessage_IsCreated()
+        [TestCategory("OrionException")]
+        [TestMethod]
+        public void CreateOrionException_CustomMessageData_IsCreated()
+        {
+            OrionException xOrionException;
 
-        //    xException = new XException("Test message;", "DataTest1=DataValue1", "DataTest2=DataValue2", "DataTest3=DataValue3");
+            xOrionException = new OrionException("Test message;", "DataTest1=DataValue1", "DataTest2=DataValue2", "DataTest3=DataValue3");
 
-        //    Assert.IsNotNull(xException);
-        //    Assert.AreEqual(xException.Message, "Test message;");
-        //    Assert.IsNotNull(xException.Data);
-        //    Assert.AreEqual(xException.Data.Contains("DataTest1"), true);
-        //    Assert.AreEqual(xException.Data["DataTest1"], "DataValue1");
-        //    Assert.AreEqual(xException.Data.Contains("DataTest2"), true);
-        //    Assert.AreEqual(xException.Data["DataTest2"], "DataValue2");
-        //    Assert.AreEqual(xException.Data.Contains("DataTest3"), true);
-        //    Assert.AreEqual(xException.Data["DataTest3"], "DataValue3");
-        //}// CreateXException_CustomMessageData_IsCreated()
-        //[TestCategory("XException")]
-        //[TestMethod]
-        //public void CreateXException_CustomMessageInnerException_IsCreated()
-        //{
-        //    XException xException;
+            Assert.IsNotNull(xOrionException);
+            Assert.AreEqual(xOrionException.Message, "Test message;");
+            Assert.IsNotNull(xOrionException.Data);
+            Assert.AreEqual(xOrionException.Data.Contains("DataTest1"), true);
+            Assert.AreEqual(xOrionException.Data["DataTest1"], "DataValue1");
+            Assert.AreEqual(xOrionException.Data.Contains("DataTest2"), true);
+            Assert.AreEqual(xOrionException.Data["DataTest2"], "DataValue2");
+            Assert.AreEqual(xOrionException.Data.Contains("DataTest3"), true);
+            Assert.AreEqual(xOrionException.Data["DataTest3"], "DataValue3");
+        }// CreateOrionException_CustomMessageData_IsCreated()
+        [TestCategory("OrionException")]
+        [TestMethod]
+        public void CreateOrionException_CustomMessageInnerException_IsCreated()
+        {
+            OrionException xOrionException;
 
-        //    xException = new XException("Test message;", XCoreTests.xInnerException);
+            xOrionException = new OrionException("Test message;", OrionCoreTests.xInnerException);
 
-        //    Assert.IsNotNull(xException);
-        //    Assert.AreEqual(xException.Message, "Test message;");
-        //    Assert.IsNotNull(xException.InnerException);
-        //    Assert.IsInstanceOfType(xException.InnerException, typeof(ArgumentException));
-        //}// CreateXException_CustomMessage_IsCreated()
-        //[TestCategory("XException")]
-        //[TestMethod]
-        //public void CreateXException_CustomMessageInnerExceptionData_IsCreated()
-        //{
-        //    XException xException;
+            Assert.IsNotNull(xOrionException);
+            Assert.AreEqual(xOrionException.Message, "Test message;");
+            Assert.IsNotNull(xOrionException.InnerException);
+            Assert.IsInstanceOfType(xOrionException.InnerException, typeof(ArgumentException));
+        }// CreateOrionException_CustomMessageInnerException_IsCreated()
+        [TestCategory("OrionException")]
+        [TestMethod]
+        public void CreateOrionException_CustomMessageInnerExceptionData_IsCreated()
+        {
+            OrionException xOrionException;
 
-        //    xException = new XException("Test message;", XCoreTests.xInnerException, "DataTest1=DataValue1", "DataTest2=DataValue2", "DataTest3=DataValue3");
+            xOrionException = new OrionException("Test message;", OrionCoreTests.xInnerException, "DataTest1=DataValue1", "DataTest2=DataValue2", "DataTest3=DataValue3");
 
-        //    Assert.IsNotNull(xException);
-        //    Assert.AreEqual(xException.Message, "Test message;");
-        //    Assert.IsNotNull(xException.InnerException);
-        //    Assert.IsInstanceOfType(xException.InnerException, typeof(ArgumentException));
-        //    Assert.IsNotNull(xException.Data);
-        //    Assert.AreEqual(xException.Data.Contains("DataTest1"), true);
-        //    Assert.AreEqual(xException.Data["DataTest1"], "DataValue1");
-        //    Assert.AreEqual(xException.Data.Contains("DataTest2"), true);
-        //    Assert.AreEqual(xException.Data["DataTest2"], "DataValue2");
-        //    Assert.AreEqual(xException.Data.Contains("DataTest3"), true);
-        //    Assert.AreEqual(xException.Data["DataTest3"], "DataValue3");
-        //}// CreateXException_CustomMessageInnerExceptionData_IsCreated()
-        //#endregion
+            Assert.IsNotNull(xOrionException);
+            Assert.AreEqual(xOrionException.Message, "Test message;");
+            Assert.IsNotNull(xOrionException.InnerException);
+            Assert.IsInstanceOfType(xOrionException.InnerException, typeof(ArgumentException));
+            Assert.IsNotNull(xOrionException.Data);
+            Assert.AreEqual(xOrionException.Data.Contains("DataTest1"), true);
+            Assert.AreEqual(xOrionException.Data["DataTest1"], "DataValue1");
+            Assert.AreEqual(xOrionException.Data.Contains("DataTest2"), true);
+            Assert.AreEqual(xOrionException.Data["DataTest2"], "DataValue2");
+            Assert.AreEqual(xOrionException.Data.Contains("DataTest3"), true);
+            Assert.AreEqual(xOrionException.Data["DataTest3"], "DataValue3");
+        }// CreateOrionException_CustomMessageInnerExceptionData_IsCreated()
+        #endregion
 
         //#region XErrorManager Creation
         //[TestCategory("XErrorManager")]
