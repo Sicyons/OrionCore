@@ -11,6 +11,7 @@ namespace OrionCore.ErrorManagement
         public String DisplayMessage { get; private set; }
         public String LogMessage { get; private set; }
         public String SourceApplicationName { get; private set; }
+        public DateTime LogDate { get; private set; }
         public Exception SourceException { get; private set; }
         #endregion
 
@@ -21,6 +22,7 @@ namespace OrionCore.ErrorManagement
             this.DisplayMessage = displayMessage;
             this.SourceException = sourceException;
             this.SourceApplicationName = sourceApplicationName;
+            this.LogDate = DateTime.Now;
         }// StructOrionErrorLogInfos()
         #endregion
     }

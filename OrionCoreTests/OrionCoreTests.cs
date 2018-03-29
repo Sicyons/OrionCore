@@ -14,7 +14,7 @@ namespace OrionCoreTests
         private static Exception xInnerException = new ArgumentException("Test exception;");
         private static String strLogFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestsLogs");
         //private static String strLogFilePath = Path.Combine("c:\\", "Temp", "XErrorManagerTests", "Error.log");
-        //private static XHistoryFile xXHistoryFile;
+        private static OrionHistoryFile xOrionHistoryFile;
         #endregion
 
         #region Initializations
@@ -136,40 +136,41 @@ namespace OrionCoreTests
         }// CreateOrionException_CustomMessageInnerExceptionData_IsCreated()
         #endregion
 
-        //#region XErrorManager Creation
-        //[TestCategory("XErrorManager")]
-        //[TestMethod]
-        //public void CreateXErrorManager_Empty_IsCreated()
-        //{
-        //    XErrorManager xXErrorManager;
+        #region OrionErrorManager
+        #region XErrorManager Creation
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void CreateOrionErrorManager_Empty_IsCreated()
+        {
+            OrionErrorManager xOrionErrorManager;
 
-        //    xXErrorManager = new XErrorManager();
+            xOrionErrorManager = new OrionErrorManager();
 
-        //    Assert.IsNotNull(xXErrorManager);
-        //}// CreateXErrorManager_Empty_IsCreated()
-        //[TestCategory("XErrorManager")]
-        //[TestMethod]
-        //public void CreateXErrorManager_XHistoryFile1_IsCreated()
-        //{
-        //    XErrorManager xXErrorManager;
+            Assert.IsNotNull(xOrionErrorManager);
+        }// CreateOrionErrorManager_Empty_IsCreated()
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void CreateOrionErrorManager_OrionHistoryFile1_IsCreated()
+        {
+            OrionErrorManager xOrionErrorManager;
 
-        //    xXErrorManager = new XErrorManager(XCoreTests.xXHistoryFile);
+            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
 
-        //    Assert.IsNotNull(xXErrorManager);
-        //    Assert.IsInstanceOfType(xXErrorManager.LogManager1, typeof(XHistoryFile));
-        //}// CreateXErrorManager_XHistoryFile1_IsCreated()
-        //[TestCategory("XErrorManager")]
-        //[TestMethod]
-        //public void CreateXErrorManager_XHistoryFile2_IsCreated()
-        //{
-        //    XErrorManager xXErrorManager;
+            Assert.IsNotNull(xOrionErrorManager);
+            Assert.IsInstanceOfType(xOrionErrorManager.LogManager1, typeof(OrionHistoryFile));
+        }// CreateOrionErrorManager_OrionHistoryFile1_IsCreated()
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void CreateOrionErrorManager_OrionHistoryFile2_IsCreated()
+        {
+            OrionErrorManager xOrionErrorManager;
 
-        //    xXErrorManager = new XErrorManager(null, XCoreTests.xXHistoryFile);
+            xOrionErrorManager = new OrionErrorManager(null, OrionCoreTests.xOrionHistoryFile);
 
-        //    Assert.IsNotNull(xXErrorManager);
-        //    Assert.IsInstanceOfType(xXErrorManager.LogManager1, typeof(XHistoryFile));
-        //}// CreateXErrorManager_XHistoryFile2_IsCreated()
-        //#endregion
+            Assert.IsNotNull(xOrionErrorManager);
+            Assert.IsInstanceOfType(xOrionErrorManager.LogManager1, typeof(OrionHistoryFile));
+        }// CreateOrionErrorManager_OrionHistoryFile2_IsCreated()
+        #endregion
 
         //#region Error reporting
         //[TestCategory("XErrorManager")]
@@ -249,6 +250,7 @@ namespace OrionCoreTests
         //    Assert.IsTrue(bWellFormattedLines);
         //}// ParseStackTrace_Parse_Parsed()
         //#endregion
+        #endregion
         #endregion
     }
 }
