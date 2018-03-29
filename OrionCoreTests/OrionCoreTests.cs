@@ -1,61 +1,64 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OrionCore;
 
 namespace OrionCoreTests
 {
     [TestClass]
     public class OrionCoreTests
     {
-        //#region Fields
+        #region Fields
         //private static Exception xInnerException = new ArgumentException("Test exception;");
+        private static String strLogFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestsLogs");
         //private static String strLogFilePath = Path.Combine("c:\\", "Temp", "XErrorManagerTests", "Error.log");
         //private static XHistoryFile xXHistoryFile;
-        //#endregion
+        #endregion
 
-        //#region Initializations
-        //[TestInitialize]
-        //public void Initialize()
-        //{
-        //    String strLogFileDirectoryPath;
+        #region Initializations
+        [TestInitialize]
+        public void Initialize()
+        {
+            //    String strLogFileDirectoryPath;
 
-        //    if (String.IsNullOrWhiteSpace(XCoreTests.strLogFilePath) == false)
-        //    {
-        //        strLogFileDirectoryPath = Path.GetDirectoryName(XCoreTests.strLogFilePath);
-        //        if (Directory.Exists(strLogFileDirectoryPath) == false) Directory.CreateDirectory(strLogFileDirectoryPath);
-        //        if (File.Exists(XCoreTests.strLogFilePath) == true) File.Delete(XCoreTests.strLogFilePath);
+            if (String.IsNullOrWhiteSpace(OrionCoreTests.strLogFileDirectory) == false)
+            {
+                if (Directory.Exists(OrionCoreTests.strLogFileDirectory) == false) Directory.CreateDirectory(OrionCoreTests.strLogFileDirectory);
+                //        if (File.Exists(XCoreTests.strLogFilePath) == true) File.Delete(XCoreTests.strLogFilePath);
 
-        //        XCoreTests.xXHistoryFile = new XHistoryFile(strLogFilePath);
-        //    }
-        //}// Initialize()
-        //#endregion
+                //        XCoreTests.xXHistoryFile = new XHistoryFile(strLogFilePath);
+            }
+        }// Initialize()
+        #endregion
 
-        //#region Test methods
-        //#region XDeployement
-        //[TestCategory("XDeployment")]
-        //[TestMethod]
-        //public void XDeployment_DataFolder_IsBaseDirectory()
-        //{
-        //    Assert.AreEqual(XDeployment.DataFolder, AppDomain.CurrentDomain.BaseDirectory);
-        //}// XDeployment_DataFolder_IsBaseDirectory()
-        //[TestCategory("XDeployment")]
-        //[TestMethod]
-        //public void XDeployment_UpdateFolder_XDeployment_DataFolder_IsBaseDirectoryUpdates()
-        //{
-        //    Assert.AreEqual(XDeployment.UpdateFolder, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates"));
-        //}// XDeployment_UpdateFolder_XDeployment_DataFolder_IsBaseDirectoryUpdates()
-        //[TestCategory("XDeployment")]
-        //[TestMethod]
-        //public void XDeployment_Version_NotNull()
-        //{
-        //    Assert.IsNotNull(XDeployment.Version);
-        //}// XDeployment_Version_NotNull()
-        //[TestCategory("XDeployment")]
-        //[TestMethod]
-        //public void XDeployment_VersionPublication_Dash()
-        //{
-        //    Assert.AreEqual(XDeployment.VersionPublication, "-");
-        //}// XDeployment_VersionPublication_Dash()
-        //#endregion
+        #region Test methods
+        #region OrionDeployementInfos
+        [TestCategory("OrionDeploymentInfos")]
+        [TestMethod]
+        public void OrionDeployementInfos_DataFolder_IsBaseDirectory()
+        {
+            Assert.AreEqual(OrionDeploymentInfos.DataFolder, AppDomain.CurrentDomain.BaseDirectory);
+        }// OrionDeploymentInfos_DataFolder_IsBaseDirectory()
+        [TestCategory("OrionDeploymentInfos")]
+        [TestMethod]
+        public void OrionDeployementInfos_UpdateFolder_XDeployment_DataFolder_IsBaseDirectoryUpdates()
+        {
+            Assert.AreEqual(OrionDeploymentInfos.UpdateFolder, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates"));
+        }// OrionDeploymentInfos_UpdateFolder_XDeployment_DataFolder_IsBaseDirectoryUpdates()
+        [TestCategory("OrionDeploymentInfos")]
+        [TestMethod]
+        public void OrionDeployementInfos_Version_NotNull()
+        {
+            Assert.IsNotNull(OrionDeploymentInfos.ApplicationVersion);
+        }// OrionDeploymentInfos_Version_NotNull()
+        [TestCategory("OrionDeploymentInfos")]
+        [TestMethod]
+        public void OrionDeployementInfos_VersionPublication_Dash()
+        {
+            Assert.AreEqual(OrionDeploymentInfos.PublicationVersion, String.Empty);
+        }// OrionDeploymentInfos_VersionPublication_Dash()
+        #endregion
 
         //#region XException
         //[TestCategory("XException")]
@@ -245,6 +248,6 @@ namespace OrionCoreTests
         //    Assert.IsTrue(bWellFormattedLines);
         //}// ParseStackTrace_Parse_Parsed()
         //#endregion
-        //#endregion
+        #endregion
     }
 }
