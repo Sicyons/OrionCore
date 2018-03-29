@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OrionCore.ErrorManagement;
 using OrionFiles;
@@ -228,27 +229,27 @@ namespace OrionCoreTests
         //}//ErrorReporting_Reset_Reseted()
         //#endregion
 
-        //#region Miscellaneous
-        //[TestCategory("XErrorManager")]
-        //[TestMethod]
-        //public void ParseStackTrace_Parse_Parsed()
-        //{
-        //    Boolean bWellFormattedLines;
-        //    System.Collections.ObjectModel.Collection<String> strResultats;
+        #region Miscellaneous
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void ParseStackTrace_Parse_Parsed()
+        {
+            Boolean bWellFormattedLines;
+            Collection<String> strResultats;
 
-        //    bWellFormattedLines = true;
+            bWellFormattedLines = true;
 
-        //    strResultats = XErrorManager.ParseStackTrace();
-        //    foreach (String strResultatTemp in strResultats)
-        //        if (strResultatTemp.Split(new String[] { " -> " }, StringSplitOptions.None).Length != 2)
-        //        {
-        //            bWellFormattedLines = false;
-        //            break;
-        //        }
+            strResultats = OrionErrorManager.ParseStackTrace();
+            foreach (String strResultatTemp in strResultats)
+                if (strResultatTemp.Split(new String[] { " -> " }, StringSplitOptions.None).Length != 2)
+                {
+                    bWellFormattedLines = false;
+                    break;
+                }
 
-        //    Assert.IsTrue(bWellFormattedLines);
-        //}// ParseStackTrace_Parse_Parsed()
-        //#endregion
+            Assert.IsTrue(bWellFormattedLines);
+        }// ParseStackTrace_Parse_Parsed()
+        #endregion
         #endregion
         #endregion
     }
