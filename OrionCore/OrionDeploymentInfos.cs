@@ -1,7 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Deployment.Application;
 
-namespace OrionCore.Betas
+namespace OrionCore
 {
     static public class OrionDeploymentInfos
     {
