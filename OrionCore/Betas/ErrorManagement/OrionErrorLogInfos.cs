@@ -8,6 +8,7 @@ namespace OrionCore.ErrorManagement
     public class OrionErrorLogInfos
     {
         #region Properties
+        public ErrorTypes ErrorType { get; private set; }
         public String DisplayMessage { get; private set; }
         public String LogMessage { get; private set; }
         public String SourceApplicationName { get; private set; }
@@ -16,13 +17,14 @@ namespace OrionCore.ErrorManagement
         #endregion
 
         #region Constructors
-        internal OrionErrorLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName)
+        internal OrionErrorLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName, ErrorTypes errorType)
         {
             this.LogMessage = logMessage;
             this.DisplayMessage = displayMessage;
             this.SourceException = sourceException;
             this.SourceApplicationName = sourceApplicationName;
             this.LogDate = DateTime.Now;
+            this.ErrorType = errorType;
         }// OrionErrorLogInfos()
         #endregion
     }

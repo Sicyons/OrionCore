@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GalaSoft.MvvmLight.Messaging;
 using OrionCore.ErrorManagement;
 using OrionFiles;
 using OrionCore;
@@ -216,7 +217,7 @@ namespace OrionCoreTests
         }// ErrorReporting_MessageDisplayMessageException_Reported()
         [TestCategory("OrionErrorManager")]
         [TestMethod]
-        public void ErrorReporting_Reset_Reseted()
+        public void ErrorReporting_Reset_Reset()
         {
             OrionErrorManager xOrionErrorManager;
 
@@ -225,7 +226,73 @@ namespace OrionCoreTests
             xOrionErrorManager.Reset();
 
             Assert.IsNull(xOrionErrorManager.ErrorLog);
-        }//ErrorReporting_Reset_Reseted()
+        }//ErrorReporting_Reset_Reset()
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void ErrorReporting_Message_Sending_Warning()
+        {
+            OrionErrorManager xOrionErrorManager;
+
+            Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
+            {
+                Assert.AreEqual(message.Type, ErrorTypes.Warning);
+            });
+
+            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Warning);
+
+            Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
+
+            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        }// ErrorReporting_Message_Sending_Warning()
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void ErrorReporting_Message_Sending_Error()
+        {
+            OrionErrorManager xOrionErrorManager;
+
+            Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
+            {
+                Assert.AreEqual(message.Type, ErrorTypes.Error);
+            });
+
+            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Error);
+
+            Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
+
+            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        }// ErrorReporting_Message_Sending_Error()
+        [TestCategory("OrionErrorManager")]
+        [TestMethod]
+        public void ErrorReporting_Message_Sending_Critical()
+        {
+            OrionErrorManager xOrionErrorManager;
+
+            Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
+            {
+                Assert.AreEqual(message.Type, ErrorTypes.Critical);
+            });
+
+            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Critical);
+
+            Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
+
+            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        }// ErrorReporting_Message_Sending_Critical()
         #endregion
 
         #region Miscellaneous

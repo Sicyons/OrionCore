@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace OrionCore.ErrorManagement
 {
@@ -109,7 +110,15 @@ namespace OrionCore.ErrorManagement
         /// <remarks>No exception information will be reported. Only an error message can be retreived.</remarks>
         public void ReportError(String logMessage)
         {
-            this.ReportError(logMessage, null);
+            this.ReportError(logMessage, null, ErrorTypes.Error);
+        }// ReportError()
+        /// <summary>
+        /// Reports an error with the specified error log message.
+        /// </summary>
+        /// <remarks>No exception information will be reported. Only an error message can be retreived.</remarks>
+        public void ReportError(String logMessage, ErrorTypes errorType)
+        {
+            this.ReportError(logMessage, null, errorType);
         }// ReportError()
         /// <summary>
         /// Reports an error with the specified error log message and display error message.
@@ -117,12 +126,27 @@ namespace OrionCore.ErrorManagement
         /// <remarks>No exception information will be reported. Only error messages can be retreived.</remarks>
         public void ReportError(String logMessage, String displayErrorMessage)
         {
-            this.ReportError(logMessage, displayErrorMessage, null);
+            this.ReportError(logMessage, displayErrorMessage, null, ErrorTypes.Error);
+        }// ReportError()
+        /// <summary>
+        /// Reports an error with the specified error log message and display error message.
+        /// </summary>
+        /// <remarks>No exception information will be reported. Only error messages can be retreived.</remarks>
+        public void ReportError(String logMessage, String displayErrorMessage, ErrorTypes errorType)
+        {
+            this.ReportError(logMessage, displayErrorMessage, null, errorType);
         }// ReportError()
         /// <summary>
         /// Reports an error with the specified error log message, display error message and source exception.
         /// </summary>
         public void ReportError(String logMessage, String displayMessage, Exception ex)
+        {
+            this.ReportError(logMessage, displayMessage, ex, ErrorTypes.Error);
+        }// ReportError()
+        /// <summary>
+        /// Reports an error with the specified error log message, display error message and source exception.
+        /// </summary>
+        public void ReportError(String logMessage, String displayMessage, Exception ex, ErrorTypes errorType)
         {
             Boolean bLogSuccessfullyReported;
             Assembly xAssembly;
@@ -131,11 +155,13 @@ namespace OrionCore.ErrorManagement
 
             xAssembly = Assembly.GetEntryAssembly();
             if (xAssembly == null) xAssembly = Assembly.GetCallingAssembly();
-            this.ErrorLog = new OrionErrorLogInfos(logMessage, displayMessage, ex, xAssembly.GetName().Name);
+            this.ErrorLog = new OrionErrorLogInfos(logMessage, displayMessage, ex, xAssembly.GetName().Name, errorType);
 
             //** Try using first logManager to record log, and the second first one failed. **
             if (this.LogManager1 != null) bLogSuccessfullyReported = this.LogManager1.LogError(this.ErrorLog);
             if (bLogSuccessfullyReported == false && this.LogManager2 != null) bLogSuccessfullyReported = this.LogManager2.LogError(this.ErrorLog);
+
+            Messenger.Default.Send<OrionMessageErrorReporting>(new OrionMessageErrorReporting(this.ErrorLog.ErrorType));
         }// ReportError()
         public void Reset()
         {
