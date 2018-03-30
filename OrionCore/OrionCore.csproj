@@ -75,12 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Betas\ErrorManagement\Commons.cs" />
-    <Compile Include="Betas\ErrorManagement\OrionException.cs" />
-    <Compile Include="Betas\ErrorManagement\OrionErrorLogInfos.cs" />
-    <Compile Include="Betas\ErrorManagement\IOrionErrorLogManager.cs" />
-    <Compile Include="Betas\ErrorManagement\OrionErrorManager.cs" />
-    <Compile Include="Betas\ErrorManagement\OrionMessageErrorReporting.cs" />
+    <Compile Include="ErrorManagement\Commons.cs" />
+    <Compile Include="ErrorManagement\OrionException.cs" />
+    <Compile Include="ErrorManagement\OrionErrorLogInfos.cs" />
+    <Compile Include="ErrorManagement\IOrionErrorLogManager.cs" />
+    <Compile Include="ErrorManagement\OrionErrorManager.cs" />
+    <Compile Include="ErrorManagement\OrionMessageErrorReporting.cs" />
     <Compile Include="OrionDeploymentInfos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
