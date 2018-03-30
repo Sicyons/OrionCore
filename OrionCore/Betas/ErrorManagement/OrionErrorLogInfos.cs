@@ -3,9 +3,9 @@
 namespace OrionCore.ErrorManagement
 {
     /// <summary>
-    /// Struct used to compile error informations used to save an error log.
+    /// Class used to compile error informations used to save an error log.
     /// </summary>
-    public struct StructOrionErrorLogInfos
+    public class OrionErrorLogInfos
     {
         #region Properties
         public String DisplayMessage { get; private set; }
@@ -16,14 +16,14 @@ namespace OrionCore.ErrorManagement
         #endregion
 
         #region Constructors
-        internal StructOrionErrorLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName)
+        internal OrionErrorLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName)
         {
             this.LogMessage = logMessage;
             this.DisplayMessage = displayMessage;
             this.SourceException = sourceException;
             this.SourceApplicationName = sourceApplicationName;
             this.LogDate = DateTime.Now;
-        }// StructOrionErrorLogInfos()
+        }// OrionErrorLogInfos()
         #endregion
     }
 }

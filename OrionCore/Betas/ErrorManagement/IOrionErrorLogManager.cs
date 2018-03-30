@@ -8,7 +8,7 @@ namespace OrionCore.ErrorManagement
     public interface IOrionErrorLogManager
     {
         #region Methods
-        Boolean LogError(StructOrionErrorLogInfos errorLog);
+        Boolean LogError(OrionErrorLogInfos errorLog);
         #endregion
     }
 }

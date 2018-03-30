@@ -10,10 +10,10 @@ namespace OrionCore.ErrorManagement
     {
         #region Properties
         /// <summary>
-        /// Get an <see cref="StructOrionErrorLogInfos"/> structure containing last error informations.
+        /// Get an <see cref="OrionErrorLogInfos"/> class containing last error informations.
         /// </summary>
-        /// <remarks>This structure can be used with IOrionErrorLogManager object to record log informations</remarks>
-        public StructOrionErrorLogInfos ErrorLog { get; private set; }
+        /// <remarks>This class can be used with IOrionErrorLogManager object to record log informations</remarks>
+        public OrionErrorLogInfos ErrorLog { get; private set; }
         /// <summary>
         /// Get or set an <see cref="IOrionErrorLogManager"/> object to save error informations in a storage location (file, database and so on...).
         /// </summary>
@@ -131,14 +131,16 @@ namespace OrionCore.ErrorManagement
 
             xAssembly = Assembly.GetEntryAssembly();
             if (xAssembly == null) xAssembly = Assembly.GetCallingAssembly();
-            this.ErrorLog = new StructOrionErrorLogInfos(logMessage, displayMessage, ex, xAssembly.GetName().Name);
+            this.ErrorLog = new OrionErrorLogInfos(logMessage, displayMessage, ex, xAssembly.GetName().Name);
 
             //** Try using first logManager to record log, and the second first one failed. **
             if (this.LogManager1 != null) bLogSuccessfullyReported = this.LogManager1.LogError(this.ErrorLog);
             if (bLogSuccessfullyReported == false && this.LogManager2 != null) bLogSuccessfullyReported = this.LogManager2.LogError(this.ErrorLog);
-
-            //this.ErrorReported = true;
         }// ReportError()
+        public void Reset()
+        {
+            this.ErrorLog = null;
+        }// Reset()
         #endregion
     }
 }
