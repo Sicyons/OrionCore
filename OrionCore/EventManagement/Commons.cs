@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace OrionCore.LogManagement
+namespace OrionCore.EventManagement
 {
     #region Enumerations
-    public enum LogTypes
+    public enum EventTypes
     {
-        infos,
+        Information,
         Warning,
         Error,
         Critical
