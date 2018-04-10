@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace OrionCore.ErrorManagement
+namespace OrionCore.LogManagement
 {
     /// <summary>
-    /// Class used to compile error informations used to save an error log.
+    /// Class used to compile error informations used to save a log.
     /// </summary>
-    public class OrionErrorLogInfos
+    public class OrionLogInfos
     {
         #region Properties
-        public ErrorTypes ErrorType { get; private set; }
+        public LogTypes LogType { get; private set; }
         public String DisplayMessage { get; private set; }
         public String LogMessage { get; private set; }
         public String SourceApplicationName { get; private set; }
@@ -17,15 +17,15 @@ namespace OrionCore.ErrorManagement
         #endregion
 
         #region Constructors
-        internal OrionErrorLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName, ErrorTypes errorType)
+        internal OrionLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName, LogTypes logType)
         {
             this.LogMessage = logMessage;
             this.DisplayMessage = displayMessage;
             this.SourceException = sourceException;
             this.SourceApplicationName = sourceApplicationName;
             this.LogDate = DateTime.Now;
-            this.ErrorType = errorType;
-        }// OrionErrorLogInfos()
+            this.LogType = logType;
+        }// OrionLogInfos()
         #endregion
     }
 }

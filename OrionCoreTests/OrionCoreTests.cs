@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Collections.ObjectModel;
+//using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GalaSoft.MvvmLight.Messaging;
+//using GalaSoft.MvvmLight.Messaging;
 using OrionCore.ErrorManagement;
 using OrionFiles;
 using OrionCore;
@@ -137,186 +137,186 @@ namespace OrionCoreTests
         }// CreateOrionException_CustomMessageInnerExceptionData_IsCreated()
         #endregion
 
-        #region OrionErrorManager
-        #region XErrorManager Creation
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void CreateOrionErrorManager_Empty_IsCreated()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //#region OrionErrorManager
+        //#region XErrorManager Creation
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void CreateOrionErrorManager_Empty_IsCreated()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager();
+        //    xOrionErrorManager = new OrionErrorManager();
 
-            Assert.IsNotNull(xOrionErrorManager);
-        }// CreateOrionErrorManager_Empty_IsCreated()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void CreateOrionErrorManager_OrionHistoryFile1_IsCreated()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager);
+        //}// CreateOrionErrorManager_Empty_IsCreated()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void CreateOrionErrorManager_OrionHistoryFile1_IsCreated()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
 
-            Assert.IsNotNull(xOrionErrorManager);
-            Assert.IsInstanceOfType(xOrionErrorManager.LogManager1, typeof(OrionHistoryFile));
-        }// CreateOrionErrorManager_OrionHistoryFile1_IsCreated()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void CreateOrionErrorManager_OrionHistoryFile2_IsCreated()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager);
+        //    Assert.IsInstanceOfType(xOrionErrorManager.LogManager1, typeof(OrionHistoryFile));
+        //}// CreateOrionErrorManager_OrionHistoryFile1_IsCreated()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void CreateOrionErrorManager_OrionHistoryFile2_IsCreated()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager(null, OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager = new OrionErrorManager(null, OrionCoreTests.xOrionHistoryFile);
 
-            Assert.IsNotNull(xOrionErrorManager);
-            Assert.IsInstanceOfType(xOrionErrorManager.LogManager1, typeof(OrionHistoryFile));
-        }// CreateOrionErrorManager_OrionHistoryFile2_IsCreated()
-        #endregion
+        //    Assert.IsNotNull(xOrionErrorManager);
+        //    Assert.IsInstanceOfType(xOrionErrorManager.LogManager1, typeof(OrionHistoryFile));
+        //}// CreateOrionErrorManager_OrionHistoryFile2_IsCreated()
+        //#endregion
 
-        #region Error reporting
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_Message_Reported()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //#region Error reporting
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_Message_Reported()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;");
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;");
 
-            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
-        }// ErrorReporting_Message_Reported()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_MessageException_Reported()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+        //}// ErrorReporting_Message_Reported()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_MessageException_Reported()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;", null, new OrionException("Test exception;"));
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;", null, new OrionException("Test exception;"));
 
-            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
-            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
-        }// ErrorReporting_MessageException_Reported()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_MessageDisplayMessageException_Reported()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+        //    Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        //}// ErrorReporting_MessageException_Reported()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_MessageDisplayMessageException_Reported()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"));
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"));
 
-            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
-            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
-        }// ErrorReporting_MessageDisplayMessageException_Reported()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_Reset_Reset()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+        //    Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        //}// ErrorReporting_MessageDisplayMessageException_Reported()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_Reset_Reset()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;");
-            xOrionErrorManager.Reset();
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;");
+        //    xOrionErrorManager.Reset();
 
-            Assert.IsNull(xOrionErrorManager.ErrorLog);
-        }//ErrorReporting_Reset_Reset()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_Message_Sending_Warning()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNull(xOrionErrorManager.ErrorLog);
+        //}//ErrorReporting_Reset_Reset()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_Message_Sending_Warning()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
-            {
-                Assert.AreEqual(message.Type, ErrorTypes.Warning);
-            });
+        //    Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
+        //    {
+        //        Assert.AreEqual(message.Type, ErrorTypes.Warning);
+        //    });
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Warning);
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Warning);
 
-            Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
+        //    Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
 
-            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
-            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
-        }// ErrorReporting_Message_Sending_Warning()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_Message_Sending_Error()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+        //    Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        //}// ErrorReporting_Message_Sending_Warning()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_Message_Sending_Error()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
-            {
-                Assert.AreEqual(message.Type, ErrorTypes.Error);
-            });
+        //    Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
+        //    {
+        //        Assert.AreEqual(message.Type, ErrorTypes.Error);
+        //    });
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Error);
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Error);
 
-            Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
+        //    Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
 
-            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
-            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
-        }// ErrorReporting_Message_Sending_Error()
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ErrorReporting_Message_Sending_Critical()
-        {
-            OrionErrorManager xOrionErrorManager;
+        //    Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+        //    Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        //}// ErrorReporting_Message_Sending_Error()
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ErrorReporting_Message_Sending_Critical()
+        //{
+        //    OrionErrorManager xOrionErrorManager;
 
-            Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
-            {
-                Assert.AreEqual(message.Type, ErrorTypes.Critical);
-            });
+        //    Messenger.Default.Register<OrionMessageErrorReporting>(this, (message) =>
+        //    {
+        //        Assert.AreEqual(message.Type, ErrorTypes.Critical);
+        //    });
 
-            xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
-            xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Critical);
+        //    xOrionErrorManager = new OrionErrorManager(OrionCoreTests.xOrionHistoryFile);
+        //    xOrionErrorManager.ReportError("Test Message;", "Test display message;", new OrionException("Test exception;"), ErrorTypes.Critical);
 
-            Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
+        //    Messenger.Default.Unregister<OrionMessageErrorReporting>(this);
 
-            Assert.IsNotNull(xOrionErrorManager.ErrorLog);
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
-            Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
-            Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
-        }// ErrorReporting_Message_Sending_Critical()
-        #endregion
+        //    Assert.IsNotNull(xOrionErrorManager.ErrorLog);
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.LogMessage, "Test Message;");
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.DisplayMessage, "Test display message;");
+        //    Assert.IsInstanceOfType(xOrionErrorManager.ErrorLog.SourceException, typeof(OrionException));
+        //    Assert.AreEqual(xOrionErrorManager.ErrorLog.SourceException.Message, "Test exception;");
+        //}// ErrorReporting_Message_Sending_Critical()
+        //#endregion
 
-        #region Miscellaneous
-        [TestCategory("OrionErrorManager")]
-        [TestMethod]
-        public void ParseStackTrace_Parse_Parsed()
-        {
-            Boolean bWellFormattedLines;
-            Collection<String> strResultats;
+        //#region Miscellaneous
+        //[TestCategory("OrionErrorManager")]
+        //[TestMethod]
+        //public void ParseStackTrace_Parse_Parsed()
+        //{
+        //    Boolean bWellFormattedLines;
+        //    Collection<String> strResultats;
 
-            bWellFormattedLines = true;
+        //    bWellFormattedLines = true;
 
-            strResultats = OrionErrorManager.ParseStackTrace();
-            foreach (String strResultatTemp in strResultats)
-                if (strResultatTemp.Split(new String[] { " -> " }, StringSplitOptions.None).Length != 2)
-                {
-                    bWellFormattedLines = false;
-                    break;
-                }
+        //    strResultats = OrionErrorManager.ParseStackTrace();
+        //    foreach (String strResultatTemp in strResultats)
+        //        if (strResultatTemp.Split(new String[] { " -> " }, StringSplitOptions.None).Length != 2)
+        //        {
+        //            bWellFormattedLines = false;
+        //            break;
+        //        }
 
-            Assert.IsTrue(bWellFormattedLines);
-        }// ParseStackTrace_Parse_Parsed()
-        #endregion
-        #endregion
+        //    Assert.IsTrue(bWellFormattedLines);
+        //}// ParseStackTrace_Parse_Parsed()
+        //#endregion
+        //#endregion
         #endregion
     }
 }
