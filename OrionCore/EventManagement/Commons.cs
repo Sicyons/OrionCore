@@ -8,7 +8,7 @@ namespace OrionCore.EventManagement
         Information,
         Warning,
         Error,
-        Critical
+        CriticalError
     }
     #endregion
 }

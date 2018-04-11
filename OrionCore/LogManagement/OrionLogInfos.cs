@@ -17,17 +17,21 @@ namespace OrionCore.LogManagement
         public String DisplayMessage { get; private set; }
         public String LogMessage { get; private set; }
         public String SourceApplicationName { get; private set; }
+        public String Comment1 { get; private set; }
+        public String Comment2 { get; private set; }
         public DateTime LogDate { get; private set; }
         public Exception SourceException { get; private set; }
         #endregion
 
         #region Constructors
-        internal OrionLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName, EventTypes eventType)
+        internal OrionLogInfos(String logMessage, String displayMessage, Exception sourceException, String sourceApplicationName, String comment1, String comment2, EventTypes eventType)
         {
             this.LogMessage = logMessage;
             this.DisplayMessage = displayMessage;
             this.SourceException = sourceException;
             this.SourceApplicationName = sourceApplicationName;
+            this.Comment1 = comment1;
+            this.Comment2 = comment2;
             this.LogDate = DateTime.Now;
             this.EventType = eventType;
         }// OrionLogInfos()

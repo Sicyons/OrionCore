@@ -52,45 +52,45 @@ namespace OrionCore.EventManagement
         /// Reports an event with the specified event log message.
         /// </summary>
         /// <remarks>No exception information will be reported. Only a log message can be retreived.</remarks>
-        public void ReportEvent(String logMessage)
+        public OrionLogInfos ReportEvent(String logMessage, String comment1 = null, String comment2 = null)
         {
-            this.ReportEvent(logMessage, null, EventTypes.Error);
+            return this.ReportEvent(logMessage, null, null, EventTypes.Information, comment1, comment2);
         }// ReportEvent()
         /// <summary>
         /// Reports an event with the specified event log message.
         /// </summary>
         /// <remarks>No exception information will be reported. Only a log message can be retreived.</remarks>
-        public void ReportEvent(String logMessage, EventTypes eventType)
+        public OrionLogInfos ReportEvent(String logMessage, EventTypes eventType, String comment1 = null, String comment2 = null)
         {
-            this.ReportEvent(logMessage, null, eventType);
+            return this.ReportEvent(logMessage, null, null, eventType, comment1, comment2);
         }// ReportEvent()
         /// <summary>
         /// Reports an event with the specified event log message and display event message. Event type is set to <see cref="EventTypes.Information" /> type.
         /// </summary>
         /// <remarks>No exception information will be reported. Only event messages can be retreived.</remarks>
-        public void ReportEvent(String logMessage, String displayEventMessage)
+        public OrionLogInfos ReportEvent(String logMessage, String displayEventMessage, String comment1 = null, String comment2 = null)
         {
-            this.ReportEvent(logMessage, displayEventMessage, null, EventTypes.Information);
+            return this.ReportEvent(logMessage, displayEventMessage, null, EventTypes.Information, comment1, comment2);
         }// ReportEvent()
         /// <summary>
         /// Reports an event with the specified event log message and display event message.
         /// </summary>
         /// <remarks>No exception information will be reported. Only event messages can be retreived.</remarks>
-        public void ReportEvent(String logMessage, String displayEventMessage, EventTypes eventType)
+        public OrionLogInfos ReportEvent(String logMessage, String displayEventMessage, EventTypes eventType, String comment1 = null, String comment2 = null)
         {
-            this.ReportEvent(logMessage, displayEventMessage, null, eventType);
+            return this.ReportEvent(logMessage, displayEventMessage, null, eventType, comment1, comment2);
         }// ReportEvent()
         /// <summary>
         /// Reports an event with the specified event log message, display event message and source exception. Event type is set to <see cref="EventTypes.Error" /> type.
         /// </summary>
-        public void ReportEvent(String logMessage, String displayMessage, Exception ex)
+        public OrionLogInfos ReportEvent(String logMessage, String displayMessage, Exception ex, String comment1 = null, String comment2 = null)
         {
-            this.ReportEvent(logMessage, displayMessage, ex, EventTypes.Error);
+            return this.ReportEvent(logMessage, displayMessage, ex, EventTypes.Error, comment1, comment2);
         }// ReportError()
         /// <summary>
         /// Reports an event with the specified event log message, display event message and source exception.
         /// </summary>
-        public void ReportEvent(String logMessage, String displayMessage, Exception ex, EventTypes eventType)
+        public OrionLogInfos ReportEvent(String logMessage, String displayMessage, Exception ex, EventTypes eventType, String comment1 = null, String comment2 = null)
         {
             Boolean bLogSuccessfullyReported;
             Assembly xAssembly;
@@ -99,13 +99,15 @@ namespace OrionCore.EventManagement
 
             xAssembly = Assembly.GetEntryAssembly();
             if (xAssembly == null) xAssembly = Assembly.GetCallingAssembly();
-            this.Log = new OrionLogInfos(logMessage, displayMessage, ex, xAssembly.GetName().Name, eventType);
+            this.Log = new OrionLogInfos(logMessage, displayMessage, ex, xAssembly.GetName().Name, comment1, comment2, eventType);
 
             //** Try using first logManager to record log, and the second first one failed. **
             if (this.LogManager1 != null) bLogSuccessfullyReported = this.LogManager1.SaveLog(this.Log);
             if (bLogSuccessfullyReported == false && this.LogManager2 != null) bLogSuccessfullyReported = this.LogManager2.SaveLog(this.Log);
 
             Messenger.Default.Send<OrionMessageEventReporting>(new OrionMessageEventReporting(this.Log.EventType));
+
+            return this.Log;
         }// ReportEvent()
         public void Reset()
         {
